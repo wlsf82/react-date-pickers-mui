@@ -11,7 +11,7 @@ Cypress.Commands.add('assertPickedDateIsEqualTo', (date) => {
   // in case their value is less than 10
   day < 10 ? day = `0${day}` : day
   month < 10 ? month = `0${month}` : month
-  // From the `basicDatePickerCalendarButton`,
+  // From the `basicDatePicker`,
   // find the input field with a "MM/DD/YYYY" placeholder,
   cy.get('@basicDatePicker')
     .find('input[placeholder="MM/DD/YYYY"]')

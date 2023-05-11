@@ -1,103 +1,85 @@
 describe('Date picker - Material UI', () => {
+  // Arrange (steps that are equal to all tests)
   beforeEach(() => {
+    // Visits the url of the page under test
     cy.visit('/date-picker')
+    // From the 'Basic date picker' label,
+    // get the next element,
+    // and give it an alias of `basicDatePicker`
     cy.contains('label', 'Basic date picker')
       .next()
       .as('basicDatePicker')
+    // From the `basicDatePicker`,
+    // find the calendar button by its aria-label,
+    // and click on it
     cy.get('@basicDatePicker')
       .find('button[aria-label="Choose date"]')
       .click()
+    // Get the opened date picker dialog,
+    // and give it an alias of `datePickerDialog`
+    cy.get('div[role="dialog"]')
+      .as('datePickerDialog')
+    // From the `datePickerDialog`,
+    // find the current date button by is aria-current,
+    // and give it an alias of today
+    cy.get('@datePickerDialog')
+      .find('button[aria-current="date"]')
+      .as('today')
+    // From the `today` button,
+    // get the previous element,
+    // and give it an alias of yesterday
+    cy.get('@today')
+      .prev()
+      .as('yesterday')
+    // From the `today` button,
+    // get the next element,
+    // and give it an alias of tomorrow
+    cy.get('@today')
+      .next()
+      .as('tomorrow')
   })
 
   it('shows the opened date picker dialog and closes it', () => {
-    cy.get('div[role="dialog"]')
-      .as('datePickerDialog')
+    // Assert
+    cy.get('@datePickerDialog')
       .its('length')
       .should('be.equal', 1)
     cy.get('@datePickerDialog')
       .should('be.visible')
+    // Act
     cy.get('@basicDatePicker')
       .click()
+    // Assert
     cy.get('@datePickerDialog')
       .should('not.exist')
   })
 
   it('picks the current date', () => {
+    // Arrange
     const today = new Date()
-    let day = today.getDate()
-    let month = today.getMonth() + 1
-    const year = today.getFullYear()
-    day < 10 ? day = `0${day}` : day
-    month < 10 ? month = `0${month}` : month
-
-    cy.get('div[role="dialog"] .MuiPickersDay-today')
-      .should('be.visible')
-      .click()
-    // Or
-    // cy.get('div[role="dialog"] button[aria-current="date"]')
-    //   .should('be.visible')
-    //   .click()
-    cy.get('@basicDatePicker')
-      .find('input[placeholder="MM/DD/YYYY"]')
-      .then($dateInputField => {
-        const currentDate = $dateInputField[0].value
-        expect(currentDate).to.equal(`${month}/${day}/${year}`)
-      })
+    // Act
+    cy.get('@today').click()
+    // Assert
+    cy.assertPickedDateIsEqualTo(today)
   })
 
   it('picks a date in the past', () => {
-    const yesterday = new Date();
+    // Arrange
+    const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
-    let day = yesterday.getDate()
-    let month = yesterday.getMonth() + 1
-    const year = yesterday.getFullYear()
-    day < 10 ? day = `0${day}` : day
-    month < 10 ? month = `0${month}` : month
-
-    cy.get('div[role="dialog"] .MuiPickersDay-today')
-      .prev()
-      .as('yesterday')
-      .should('be.visible')
-    // Or
-    // cy.get('div[role="dialog"] button[aria-current="date"]')
-    //   .prev()
-    //   .as('yesterday')
-    //   .should('be.visible')
-    cy.get('@yesterday')
-      .click()
-    cy.get('@basicDatePicker')
-      .find('input[placeholder="MM/DD/YYYY"]')
-      .then($dateInputField => {
-        const currentDate = $dateInputField[0].value
-        expect(currentDate).to.equal(`${month}/${day}/${year}`)
-      })
+    // Act
+    cy.get('@yesterday').click()
+    // Assert
+    cy.assertPickedDateIsEqualTo(yesterday)
   })
 
   it('picks a date in the future', () => {
-    const tomorrow = new Date();
+    // Arrange
+    const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    let day = tomorrow.getDate()
-    let month = tomorrow.getMonth() + 1
-    const year = tomorrow.getFullYear()
-    day < 10 ? day = `0${day}` : day
-    month < 10 ? month = `0${month}` : month
-
-    cy.get('div[role="dialog"] .MuiPickersDay-today')
-      .next()
-      .as('tomorrow')
-      .should('be.visible')
-    // Or
-    // cy.get('div[role="dialog"] button[aria-current="date"]')
-    //   .next()
-    //   .as('tomorrow')
-    //   .should('be.visible')
-    cy.get('@tomorrow')
-      .click()
-    cy.get('@basicDatePicker')
-      .find('input[placeholder="MM/DD/YYYY"]')
-      .then($dateInputField => {
-        const currentDate = $dateInputField[0].value
-        expect(currentDate).to.equal(`${month}/${day}/${year}`)
-      })
+    // Act
+    cy.get('@tomorrow').click()
+    // Assert
+    cy.assertPickedDateIsEqualTo(tomorrow)
   })
 })

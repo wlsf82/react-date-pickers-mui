@@ -22,6 +22,8 @@
   "license": "MIT",
   "devDependencies": {
     "cypress": "^12.12.0",
-    "cypress-plugin-xhr-toggle": "^1.0.0"
+    "cypress-plugin-xhr-toggle": "^1.0.0",
+    "eslint": "^8.40.0",
+    "eslint-plugin-cypress": "^2.13.3"
   }
 }

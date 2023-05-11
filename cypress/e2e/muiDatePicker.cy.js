@@ -24,7 +24,7 @@ describe('Date picker - Material UI', () => {
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')
     // From the `datePickerDialog`,
-    // find the current date button by is aria-current,
+    // find the current date button by its aria-current,
     // and give it an alias of today
     cy.get('@datePickerDialog')
       .find('button[aria-current="date"]')

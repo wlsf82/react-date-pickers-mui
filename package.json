@@ -1,0 +1,27 @@
+{
+  "name": "react-date-pickers-mui",
+  "version": "1.0.0",
+  "description": "TBD.",
+  "main": "cypress.config.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run"
+  },
+  "keywords": [
+    "testing",
+    "material-ui",
+    "datepicker",
+    "data-picker",
+    "mui",
+    "cypress",
+    "materialui",
+    "cypress-io",
+    "mui-datepicker"
+  ],
+  "author": "Walmyr <wlsf82@gmail.com> (https://walmyr.dev/)",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^12.12.0",
+    "cypress-plugin-xhr-toggle": "^1.0.0"
+  }
+}

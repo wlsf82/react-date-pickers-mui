@@ -16,7 +16,7 @@ Cypress.Commands.add('assertPickedDateIsEqualTo', (date) => {
   cy.get('@basicDatePicker')
     .find('input[placeholder="MM/DD/YYYY"]')
     // Then, get its value,
-    // and assert it matches the received date
+    // and assert it matches with the received date
     .then($dateInputField => {
       const setDate = $dateInputField[0].value
       expect(setDate).to.equal(`${month}/${day}/${year}`)

@@ -1,5 +1,5 @@
 Cypress.Commands.add('assertPickedDateIsEqualTo', (date) => {
-  // Spread the date in three different variables
+  // Spread the date into three different variables
   // (day, month, and year)
   let day = date.getDate()
   // Since in JavaScript months start in 0,

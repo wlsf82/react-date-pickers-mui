@@ -1,7 +1,7 @@
 describe('Date picker - Material UI', () => {
   // Arrange (steps that are equal to all tests)
   beforeEach(() => {
-    // Visits the url of the page under test
+    // Visits the url of the web page under test
     cy.visit('/date-picker')
     // From the 'Basic date picker' label,
     // get the next element,

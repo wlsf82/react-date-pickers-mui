@@ -1,6 +1,10 @@
 # react-date-pickers-mui
 
-TBD.
+This project is still a **work-in-progress**.
+
+The tests for dates in the past and future do not work all the time, and I'm still figuring out how to solve it.
+
+If you have an idea, feel free to contribute.
 
 ___
 

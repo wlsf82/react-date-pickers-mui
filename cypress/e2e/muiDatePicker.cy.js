@@ -1,4 +1,6 @@
 describe('Date picker - Material UI', () => {
+  const today = new Date()
+  const todaysDay = today.getDate()
   // Arrange (steps that are equal to all tests)
   beforeEach(() => {
     // Visits the url of the web page under test
@@ -23,24 +25,6 @@ describe('Date picker - Material UI', () => {
     // and give it an alias of `datePickerDialog`
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')
-    // From the `datePickerDialog`,
-    // find the current date button by its aria-current,
-    // and give it an alias of today
-    cy.get('@datePickerDialog')
-      .find('button[aria-current="date"]')
-      .as('today')
-    // From the `today` button,
-    // get the previous element,
-    // and give it an alias of yesterday
-    cy.get('@today')
-      .prev()
-      .as('yesterday')
-    // From the `today` button,
-    // get the next element,
-    // and give it an alias of tomorrow
-    cy.get('@today')
-      .next()
-      .as('tomorrow')
   })
 
   it('shows the opened date picker dialog and closes it', () => {
@@ -59,9 +43,11 @@ describe('Date picker - Material UI', () => {
   })
 
   it('picks the current date', () => {
-    // Arrange
-    const today = new Date()
     // Act
+    cy.get('@datePickerDialog')
+      .contains(todaysDay)
+      .should('be.visible')
+      .as('today')
     cy.get('@today').click()
     // Assert
     cy.assertPickedDateIsEqualTo(today)
@@ -71,7 +57,12 @@ describe('Date picker - Material UI', () => {
     // Arrange
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
+    const yesterdaysDay = yesterday.getDate()
     // Act
+    cy.get('@datePickerDialog')
+      .contains(yesterdaysDay)
+      .should('be.visible')
+      .as('yesterday')
     cy.get('@yesterday').click()
     // Assert
     cy.assertPickedDateIsEqualTo(yesterday)
@@ -81,7 +72,12 @@ describe('Date picker - Material UI', () => {
     // Arrange
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
+    const tomorrowsDay = tomorrow.getDate()
     // Act
+    cy.get('@datePickerDialog')
+      .contains(tomorrowsDay)
+      .should('be.visible')
+      .as('tomorrow')
     cy.get('@tomorrow').click()
     // Assert
     cy.assertPickedDateIsEqualTo(tomorrow)

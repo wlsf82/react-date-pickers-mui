@@ -1,7 +1,7 @@
 {
   "name": "react-date-pickers-mui",
   "version": "1.0.0",
-  "description": "TBD.",
+  "description": "Sample project to demonstrate how to interact with Material UI date fields using Cypress.",
   "main": "cypress.config.js",
   "scripts": {
     "cy:open": "cypress open",

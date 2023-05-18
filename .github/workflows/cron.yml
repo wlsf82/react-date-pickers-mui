@@ -1,5 +1,5 @@
 
-name: cron
+name: nightly tests
 on:
   schedule:
     # runs tests every day at 3am

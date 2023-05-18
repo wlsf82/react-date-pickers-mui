@@ -25,6 +25,9 @@ describe('Date picker - Material UI', () => {
     // and give it an alias of `datePickerDialog`
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')
+    cy.get('@datePickerDialog')
+      .find('div[role="grid"]')
+      .as('calendar')
   })
 
   it('shows the opened date picker dialog and closes it', () => {
@@ -44,7 +47,7 @@ describe('Date picker - Material UI', () => {
 
   it('picks the current date', () => {
     // Act
-    cy.get('@datePickerDialog')
+    cy.get('@calendar')
       .contains(todaysDay)
       .should('be.visible')
       .as('today')
@@ -58,8 +61,15 @@ describe('Date picker - Material UI', () => {
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
     const yesterdaysDay = yesterday.getDate()
+    // In case today is the 1st day of the month
+    // Navigate to the previous month first
+    if (todaysDay === 1) {
+      cy.get('@datePickerDialog')
+        .find('button svg[data-testid="ArrowLeftIcon"]')
+        .click()
+    }
     // Act
-    cy.get('@datePickerDialog')
+    cy.get('@calendar')
       .contains(yesterdaysDay)
       .should('be.visible')
       .as('yesterday')
@@ -73,8 +83,15 @@ describe('Date picker - Material UI', () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
     const tomorrowsDay = tomorrow.getDate()
+    // In case tomorrow is the 1st day of next month
+    // Navigate to the next month first
+    if (tomorrowsDay === 1) {
+      cy.get('@datePickerDialog')
+        .find('button svg[data-testid="ArrowRightIcon"]')
+        .click()
+    }
     // Act
-    cy.get('@datePickerDialog')
+    cy.get('@calendar')
       .contains(tomorrowsDay)
       .should('be.visible')
       .as('tomorrow')

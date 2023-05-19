@@ -13,13 +13,13 @@ describe('Date picker - Material UI', () => {
       .as('basicDatePicker')
     // From the `basicDatePicker`,
     // find the calendar button by its aria-label,
-    // and give it an alias of `basicDatePickerCalendarButton`
+    // and give it an alias of `calendarButton`
     cy.get('@basicDatePicker')
       .find('button[aria-label="Choose date"]')
-      .as('basicDatePickerCalendarButton')
-    // Get the `basicDatePickerCalendarButton`,
+      .as('calendarButton')
+    // Get the `calendarButton`,
     // and click on it
-    cy.get('@basicDatePickerCalendarButton')
+    cy.get('@calendarButton')
       .click()
     // Get the opened date picker dialog,
     // and give it an alias of `datePickerDialog`
@@ -41,7 +41,7 @@ describe('Date picker - Material UI', () => {
     cy.get('@datePickerDialog')
       .should('be.visible')
     // Act
-    cy.get('@basicDatePickerCalendarButton')
+    cy.get('@calendarButton')
       .click()
     // Assert
     cy.get('@datePickerDialog')

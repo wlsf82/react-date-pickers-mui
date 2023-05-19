@@ -1,4 +1,4 @@
-Cypress.Commands.add('assertPickedDateIsEqualTo', (date) => {
+Cypress.Commands.add('assertPickedDateIsEqualTo', date => {
   // Spread the date into three different variables
   // (day, month, and year)
   let day = date.getDate()

@@ -59,7 +59,7 @@ describe('Date picker - Material UI', () => {
     cy.assertPickedDateIsEqualTo(today)
   })
 
-  it('picks a date in the past', () => {
+  it('picks a date in the past (yesterday)', () => {
     // Arrange
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
@@ -81,7 +81,7 @@ describe('Date picker - Material UI', () => {
     cy.assertPickedDateIsEqualTo(yesterday)
   })
 
-  it('picks a date in the future', () => {
+  it('picks a date in the future (tomorrow)', () => {
     // Arrange
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)

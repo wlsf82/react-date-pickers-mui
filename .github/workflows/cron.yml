@@ -2,8 +2,8 @@
 name: nightly tests
 on:
   schedule:
-    # runs tests every day at 3am UTC
-    - cron: '0 3 * * *'
+    # runs tests every day at 1am UTC
+    - cron: '0 1 * * *'
 jobs:
   nightly:
     runs-on: ubuntu-22.04

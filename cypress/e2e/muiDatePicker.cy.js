@@ -26,6 +26,9 @@ describe('Date picker - Material UI', () => {
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')
     cy.get('@datePickerDialog')
+    // From the `datePickerDialog`,
+    // find the calendar by its role
+    // and give it an alias of `calendar`
       .find('div[role="grid"]')
       .as('calendar')
   })

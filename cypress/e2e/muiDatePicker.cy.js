@@ -64,8 +64,8 @@ describe('Date picker - Material UI', () => {
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
     const yesterdaysDay = yesterday.getDate()
-    // In case today is the 1st day of the month
-    // Navigate to the previous month first
+    // In case today is the 1st day of the month,
+    // navigate to the previous month first
     if (todaysDay === 1) {
       cy.get('@datePickerDialog')
         .find('button svg[data-testid="ArrowLeftIcon"]')
@@ -86,8 +86,8 @@ describe('Date picker - Material UI', () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
     const tomorrowsDay = tomorrow.getDate()
-    // In case tomorrow is the 1st day of next month
-    // Navigate to the next month first
+    // In case tomorrow is the 1st day of next month,
+    // navigate to the next month first
     if (tomorrowsDay === 1) {
       cy.get('@datePickerDialog')
         .find('button svg[data-testid="ArrowRightIcon"]')

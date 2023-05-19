@@ -21,7 +21,7 @@ describe('Date picker - Material UI', () => {
     // and click on it
     cy.get('@calendarButton')
       .click()
-    // Get the opened date picker dialog,
+    // Get the opened date picker dialog by its role,
     // and give it an alias of `datePickerDialog`
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')

@@ -7,4 +7,8 @@ module.exports = defineConfig({
     env: { hideXhr: true },
   },
   fixturesFolder: false,
+  retries: {
+    runMode: 2,
+    openMode: 0
+  },
 })

@@ -4,6 +4,8 @@
   "description": "Sample project to demonstrate how to interact with Material UI date fields using Cypress.",
   "main": "cypress.config.js",
   "scripts": {
+    "lint": "eslint cypress/**/*.js && eslint cypress.config.js",
+    "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix",
     "cy:open": "cypress open",
     "test": "cypress run"
   },

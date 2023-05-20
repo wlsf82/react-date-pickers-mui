@@ -73,6 +73,7 @@ describe('Date picker - Material UI', () => {
     }
     // Act
     cy.get('@calendar')
+      .find('[role="gridcell"]')
       .contains(yesterdaysDay)
       .should('be.visible')
       .as('yesterday')
@@ -95,6 +96,7 @@ describe('Date picker - Material UI', () => {
     }
     // Act
     cy.get('@calendar')
+      .find('[role="gridcell"]')
       .contains(tomorrowsDay)
       .should('be.visible')
       .as('tomorrow')

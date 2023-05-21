@@ -51,6 +51,7 @@ describe('Date picker - Material UI', () => {
   it('picks the current date', () => {
     // Act
     cy.get('@calendar')
+      .find('[role="gridcell"]')
       .contains(todaysDay)
       .should('be.visible')
       .as('today')

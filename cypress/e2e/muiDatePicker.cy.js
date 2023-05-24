@@ -33,6 +33,14 @@ describe('Date picker - Material UI', () => {
       .as('calendar')
   })
 
+  // Wait 3 seconds after every test
+  // so the recorded video doesn't get cut
+  // Source: https://youtu.be/afy7iS13ctM
+  afterEach(() => {
+    /* eslint-disable cypress/no-unnecessary-waiting */
+    cy.wait(3000)
+  })
+
   it('shows the opened date picker dialog and closes it', () => {
     // Assert
     cy.get('@datePickerDialog')

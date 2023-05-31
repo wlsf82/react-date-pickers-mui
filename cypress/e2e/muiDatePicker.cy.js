@@ -115,7 +115,7 @@ describe('Date picker - Material UI', () => {
     cy.assertPickedDateIsEqualTo(tomorrow)
   })
 
-  context('Previous and next months', () => {
+  context('Month and year', () => {
     // Arrange
     const year = today.getFullYear()
     const month = today.getMonth()
@@ -137,43 +137,63 @@ describe('Date picker - Material UI', () => {
     beforeEach(() => {
       cy.get('@datePickerDialog')
         .find(`[role="presentation"]:contains(${months[month]} ${year})`)
+        .as('currentMonthAndYear')
         .should('be.visible')
     })
 
-    it('visits the previous calendar month', () => {
-      // Arrange
-      const todayOneMonthAgo = today.setMonth(today.getMonth() - 1)
-      const dateOneMonthAgo = new Date(todayOneMonthAgo)
-      const yearOneMonthAgo = dateOneMonthAgo.getFullYear()
-      // Act
-      cy.get('@datePickerDialog')
-        .find('button svg[data-testid="ArrowLeftIcon"]')
-        .click()
-      // Assert
-      cy.get('@datePickerDialog')
-        .find(`[role="presentation"]:contains(${months[month - 1]} ${yearOneMonthAgo})`)
-        .should('be.visible')
+    context('Previous and next months', () => {
+      it('visits the previous calendar month', () => {
+        // Arrange
+        const todayOneMonthAgo = today.setMonth(today.getMonth() - 1)
+        const dateOneMonthAgo = new Date(todayOneMonthAgo)
+        const yearOneMonthAgo = dateOneMonthAgo.getFullYear()
+        // Act
+        cy.get('@datePickerDialog')
+          .find('button svg[data-testid="ArrowLeftIcon"]')
+          .click()
+        // Assert
+        cy.get('@datePickerDialog')
+          .find(`[role="presentation"]:contains(${months[month - 1]} ${yearOneMonthAgo})`)
+          .should('be.visible')
+      })
+
+      it('visits the next calendar month', () => {
+        // Arrange
+        const todayOneMonthAhead = today.setMonth(today.getMonth() + 1)
+        const dateOneMonthAhead = new Date(todayOneMonthAhead)
+        const yearOneMonthAhead = dateOneMonthAhead.getFullYear()
+        // Act
+        cy.get('@datePickerDialog')
+          .find('button svg[data-testid="ArrowRightIcon"]')
+          .click()
+        // Assert
+        cy.get('@datePickerDialog')
+          .find(`[role="presentation"]:contains(${months[month + 1]} ${yearOneMonthAhead})`)
+          .should('be.visible')
+      })
     })
 
-    it('visits the next calendar month', () => {
-      // Arrange
-      const todayOneMonthForward = today.setMonth(today.getMonth() + 1)
-      const dateOneMonthForward = new Date(todayOneMonthForward)
-      const yearOneMonthForward = dateOneMonthForward.getFullYear()
-      // Act
-      cy.get('@datePickerDialog')
-        .find('button svg[data-testid="ArrowRightIcon"]')
-        .click()
-      // Assert
-      cy.get('@datePickerDialog')
-        .find(`[role="presentation"]:contains(${months[month + 1]} ${yearOneMonthForward})`)
-        .should('be.visible')
-    })
-  })
-
-  context('Year different than the current one', () => {
-    it.skip('picks a date in a year different than the current one', () => {
-      // @TODO
+    context('Year different than the current one', () => {
+      it('picks a date in the 1st of January (5 years ahead)', () => {
+        // Arrange
+        const todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
+        const FirstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
+        FirstOfJanuaryFiveYearsAhead.setDate(1)
+        FirstOfJanuaryFiveYearsAhead.setMonth(0)
+        const FirstOfJanuaryFiveYearsAheadDate = new Date(FirstOfJanuaryFiveYearsAhead)
+        // Act
+        cy.get('@currentMonthAndYear').click()
+        cy.contains('.MuiYearCalendar-root button', year + 5)
+          .should('be.visible')
+          .click()
+        cy.get('@calendar')
+          .find('[role="gridcell"]')
+          .contains(FirstOfJanuaryFiveYearsAheadDate.getDate())
+          .should('be.visible')
+          .click()
+        // Assert
+        cy.assertPickedDateIsEqualTo(FirstOfJanuaryFiveYearsAheadDate)
+      })
     })
   })
 })

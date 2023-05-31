@@ -1,4 +1,5 @@
 describe('Date picker - Material UI', () => {
+  // Arrange
   const today = new Date()
   const todaysDay = today.getDate()
   // Arrange (steps that are equal to all tests)
@@ -115,6 +116,7 @@ describe('Date picker - Material UI', () => {
   })
 
   context('Previous and next months', () => {
+    // Arrange
     const year = today.getFullYear()
     const month = today.getMonth()
     const months = Object.freeze({

@@ -177,10 +177,10 @@ describe('Date picker - Material UI', () => {
       it('picks a date in the 1st of January (5 years ahead)', () => {
         // Arrange
         const todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
-        const FirstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
+        let FirstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
         FirstOfJanuaryFiveYearsAhead.setDate(1)
         FirstOfJanuaryFiveYearsAhead.setMonth(0)
-        const FirstOfJanuaryFiveYearsAheadDate = new Date(FirstOfJanuaryFiveYearsAhead)
+        FirstOfJanuaryFiveYearsAhead = new Date(FirstOfJanuaryFiveYearsAhead)
         // Act
         cy.get('@currentMonthAndYear').click()
         cy.contains('.MuiYearCalendar-root button', year + 5)

@@ -177,10 +177,10 @@ describe('Date picker - Material UI', () => {
       it('picks a date in the 1st of January (5 years ahead)', () => {
         // Arrange
         const todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
-        const FirstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
-        FirstOfJanuaryFiveYearsAhead.setDate(1)
-        FirstOfJanuaryFiveYearsAhead.setMonth(0)
-        const FirstOfJanuaryFiveYearsAheadDate = new Date(FirstOfJanuaryFiveYearsAhead)
+        let firstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
+        firstOfJanuaryFiveYearsAhead.setDate(1)
+        firstOfJanuaryFiveYearsAhead.setMonth(0)
+        firstOfJanuaryFiveYearsAhead = new Date(firstOfJanuaryFiveYearsAhead)
         // Act
         cy.get('@currentMonthAndYear').click()
         cy.contains('.MuiYearCalendar-root button', year + 5)
@@ -188,11 +188,11 @@ describe('Date picker - Material UI', () => {
           .click()
         cy.get('@calendar')
           .find('[role="gridcell"]')
-          .contains(FirstOfJanuaryFiveYearsAheadDate.getDate())
+          .contains(firstOfJanuaryFiveYearsAhead.getDate())
           .should('be.visible')
           .click()
         // Assert
-        cy.assertPickedDateIsEqualTo(FirstOfJanuaryFiveYearsAheadDate)
+        cy.assertPickedDateIsEqualTo(firstOfJanuaryFiveYearsAhead)
       })
     })
   })

@@ -113,4 +113,61 @@ describe('Date picker - Material UI', () => {
     // Assert
     cy.assertPickedDateIsEqualTo(tomorrow)
   })
+
+  context('Previous and next month', () => {
+    const year = today.getFullYear()
+    const month = today.getMonth()
+    const months = Object.freeze({
+      0: 'January',
+      1: 'February',
+      2: 'March',
+      3: 'April',
+      4: 'May',
+      5: 'June',
+      6: 'Jully',
+      7: 'August',
+      8: 'September',
+      9: 'October',
+      10: 'November',
+      11: 'December',
+    })
+
+    it('visits the previous calendar month', () => {
+      // Arrange
+      const todayOneMonthAgo = today.setMonth(today.getMonth() - 1)
+      const dateOneMonthAgo = new Date(todayOneMonthAgo)
+      const yearOneMonthAgo = dateOneMonthAgo.getFullYear()
+      // Assert
+      cy.get('@datePickerDialog')
+        .find(`[role="presentation"]:contains(${months[month]} ${year})`)
+        .should('be.visible')
+      // Act
+      cy.get('@datePickerDialog')
+        .find('button svg[data-testid="ArrowLeftIcon"]')
+        .click()
+      // Assert
+      cy.get('@datePickerDialog')
+        .find(`[role="presentation"]:contains(${months[month - 1]} ${yearOneMonthAgo})`)
+        .should('be.visible')
+    })
+
+    it('visits the next calendar month', () => {
+      // Arrange
+      const todayOneMonthForward = today.setMonth(today.getMonth() + 1)
+      const dateOneMonthForward = new Date(todayOneMonthForward)
+      const yearOneMonthForward = dateOneMonthForward.getFullYear()
+      // Assert
+      cy.get('@datePickerDialog')
+        .find(`[role="presentation"]:contains(${months[month]} ${year})`)
+        .should('be.visible')
+      // Act
+      cy.get('@datePickerDialog')
+        .find('button svg[data-testid="ArrowRightIcon"]')
+        .click()
+      // Assert
+      cy.get('@datePickerDialog')
+        .find(`[role="presentation"]:contains(${months[month + 1]} ${yearOneMonthForward})`)
+        .should('be.visible')
+    })
+  })
 })

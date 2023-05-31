@@ -188,7 +188,7 @@ describe('Date picker - Material UI', () => {
           .click()
         cy.get('@calendar')
           .find('[role="gridcell"]')
-          .contains(FirstOfJanuaryFiveYearsAheadDate.getDate())
+          .contains(FirstOfJanuaryFiveYearsAhead.getDate())
           .should('be.visible')
           .click()
         // Assert

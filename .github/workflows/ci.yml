@@ -1,5 +1,5 @@
 
-name: nightly tests
+name: Cypress tests
 on:
   push:
     branches:
@@ -12,12 +12,12 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 jobs:
-  nightly:
+  tests:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cypress nightly tests 🌃
+      - name: Cypress tests
         uses: cypress-io/github-action@v5
         with:
           record: true

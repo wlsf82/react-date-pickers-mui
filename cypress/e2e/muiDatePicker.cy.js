@@ -147,13 +147,14 @@ describe('Date picker - Material UI', () => {
         const todayOneMonthAgo = today.setMonth(today.getMonth() - 1)
         const dateOneMonthAgo = new Date(todayOneMonthAgo)
         const yearOneMonthAgo = dateOneMonthAgo.getFullYear()
+        const previousMonth = dateOneMonthAgo.getMonth()
         // Act
         cy.get('@datePickerDialog')
           .find('button svg[data-testid="ArrowLeftIcon"]')
           .click()
         // Assert
         cy.get('@datePickerDialog')
-          .find(`[role="presentation"]:contains(${months[month - 1]} ${yearOneMonthAgo})`)
+          .find(`[role="presentation"]:contains(${months[previousMonth]} ${yearOneMonthAgo})`)
           .should('be.visible')
       })
 
@@ -162,13 +163,14 @@ describe('Date picker - Material UI', () => {
         const todayOneMonthAhead = today.setMonth(today.getMonth() + 1)
         const dateOneMonthAhead = new Date(todayOneMonthAhead)
         const yearOneMonthAhead = dateOneMonthAhead.getFullYear()
+        const nextMonth = dateOneMonthAhead.getMonth()
         // Act
         cy.get('@datePickerDialog')
           .find('button svg[data-testid="ArrowRightIcon"]')
           .click()
         // Assert
         cy.get('@datePickerDialog')
-          .find(`[role="presentation"]:contains(${months[month + 1]} ${yearOneMonthAhead})`)
+          .find(`[role="presentation"]:contains(${months[nextMonth]} ${yearOneMonthAhead})`)
           .should('be.visible')
       })
     })

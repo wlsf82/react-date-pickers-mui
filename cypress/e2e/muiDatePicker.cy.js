@@ -192,7 +192,7 @@ describe('Date picker - Material UI', () => {
           .should('be.visible')
           .click()
         // Assert
-        cy.assertPickedDateIsEqualTo(FirstOfJanuaryFiveYearsAheadDate)
+        cy.assertPickedDateIsEqualTo(FirstOfJanuaryFiveYearsAhead)
       })
     })
   })

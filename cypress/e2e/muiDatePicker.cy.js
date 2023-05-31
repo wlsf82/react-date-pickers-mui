@@ -114,7 +114,7 @@ describe('Date picker - Material UI', () => {
     cy.assertPickedDateIsEqualTo(tomorrow)
   })
 
-  context('Previous and next month', () => {
+  context('Previous and next months', () => {
     const year = today.getFullYear()
     const month = today.getMonth()
     const months = Object.freeze({

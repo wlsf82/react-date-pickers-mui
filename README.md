@@ -1,6 +1,6 @@
 # react-date-pickers-mui
 
-[![main](https://github.com/wlsf82/react-date-pickers-mui/actions/workflows/cron.yml/badge.svg)](https://github.com/wlsf82/react-date-pickers-mui/actions)
+[![main](https://github.com/wlsf82/react-date-pickers-mui/actions/workflows/ci.yml/badge.svg)](https://github.com/wlsf82/react-date-pickers-mui/actions)
 [![react-date-pickers-mui](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/simple/2obqu6&style=flat&logo=cypress)](https://cloud.cypress.io/projects/2obqu6/runs)
 
 Sample project to demonstrate how to interact with [Material UI](https://mui.com) date fields using [Cypress](https://cypress.io).

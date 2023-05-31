@@ -1,6 +1,12 @@
 
 name: nightly tests
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   schedule:
     # runs tests every day at midnight UTC
     - cron: '0 0 * * *'

@@ -170,4 +170,10 @@ describe('Date picker - Material UI', () => {
         .should('be.visible')
     })
   })
+
+  context('Year different than the current one', () => {
+    it.skip('picks a date in a year different than the current one', () => {
+      // @TODO
+    })
+  })
 })

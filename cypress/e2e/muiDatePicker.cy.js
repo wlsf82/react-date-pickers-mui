@@ -1,6 +1,6 @@
 describe('Date picker - Material UI', () => {
   // Arrange
-  const today = new Date()
+  let today = new Date()
   const todaysDay = today.getDate()
   // Arrange (steps that are equal to all tests)
   beforeEach(() => {
@@ -40,6 +40,8 @@ describe('Date picker - Material UI', () => {
   afterEach(() => {
     /* eslint-disable cypress/no-unnecessary-waiting */
     cy.wait(2000)
+    // Reset todays' date
+    today = new Date()
   })
 
   it('shows the opened date picker dialog and closes it', () => {

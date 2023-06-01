@@ -34,10 +34,10 @@ describe('Date picker - Material UI', () => {
       .as('calendar')
   })
 
-  // Wait 2 seconds after every test
-  // so the recorded video doesn't get cut
-  // Source: https://youtu.be/afy7iS13ctM
   afterEach(() => {
+    // Wait 2 seconds after every test
+    // so the recorded video doesn't get cut
+    // Source: https://youtu.be/afy7iS13ctM
     /* eslint-disable cypress/no-unnecessary-waiting */
     cy.wait(2000)
     // Reset todays' date

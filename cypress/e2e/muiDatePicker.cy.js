@@ -16,13 +16,11 @@ describe('Date picker - Material UI', () => {
       .as('basicDatePicker')
     // From the `basicDatePicker`,
     // find the calendar button by its aria-label,
-    // and give it an alias of `calendarButton`
+    // give it an alias of `calendarButton`
+    // and click on it
     cy.get('@basicDatePicker')
       .find('button[aria-label="Choose date"]')
       .as('calendarButton')
-    // Get the `calendarButton`,
-    // and click on it
-    cy.get('@calendarButton')
       .click()
     // Get the opened date picker dialog by its role,
     // and give it an alias of `datePickerDialog`

@@ -128,7 +128,7 @@ describe('Date picker - Material UI', () => {
       3: 'April',
       4: 'May',
       5: 'June',
-      6: 'Jully',
+      6: 'July',
       7: 'August',
       8: 'September',
       9: 'October',

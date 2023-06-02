@@ -23,9 +23,11 @@ describe('Date picker - Material UI', () => {
       .as('calendarButton')
       .click()
     // Get the opened date picker dialog by its role,
-    // and give it an alias of `datePickerDialog`
+    // give it an alias of `datePickerDialog`,
+    // and assert it is visible
     cy.get('div[role="dialog"]')
       .as('datePickerDialog')
+      .should('be.visible')
     // From the `datePickerDialog`,
     // find the calendar by its role
     // and give it an alias of `calendar`
@@ -44,13 +46,7 @@ describe('Date picker - Material UI', () => {
     today = new Date()
   })
 
-  it('shows the opened date picker dialog and closes it', () => {
-    // Assert
-    cy.get('@datePickerDialog')
-      .its('length')
-      .should('be.equal', 1)
-    cy.get('@datePickerDialog')
-      .should('be.visible')
+  it('closes the date picker dialog', () => {
     // Act
     cy.get('@calendarButton')
       .click()

@@ -4,9 +4,7 @@ describe('Date picker - Material UI', () => {
   const todaysDay = today.getDate()
   // Arrange (steps that are equal to all tests)
   beforeEach(() => {
-    // Prevent failure due to application's uncaught exception
-    cy.on('uncaught:exception', () => false)
-    // Visits the url of the web page under test
+    // Visit the url of the web page under test
     cy.visit('/date-picker')
     // From the 'Basic date picker' label,
     // get the next element,

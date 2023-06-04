@@ -1,6 +1,6 @@
 describe('Date picker - Material UI', () => {
   // Arrange
-  let today = new Date()
+  const today = new Date()
   const todaysDay = today.getDate()
   // Arrange (steps that are equal to all tests)
   beforeEach(() => {
@@ -40,8 +40,6 @@ describe('Date picker - Material UI', () => {
     // Source: https://youtu.be/afy7iS13ctM
     /* eslint-disable cypress/no-unnecessary-waiting */
     cy.wait(2000)
-    // Reset todays' date
-    today = new Date()
   })
 
   it('closes the date picker dialog', () => {
@@ -140,10 +138,11 @@ describe('Date picker - Material UI', () => {
     context('Previous and next months', () => {
       it('visits the previous calendar month', () => {
         // Arrange
-        const todayOneMonthAgo = today.setMonth(today.getMonth() - 1)
-        const dateOneMonthAgo = new Date(todayOneMonthAgo)
-        const yearOneMonthAgo = dateOneMonthAgo.getFullYear()
-        const previousMonth = dateOneMonthAgo.getMonth()
+        let todayOneMonthAgo = new Date()
+        todayOneMonthAgo = todayOneMonthAgo.setMonth(todayOneMonthAgo.getMonth() - 1)
+        todayOneMonthAgo = new Date(todayOneMonthAgo)
+        const yearOneMonthAgo = todayOneMonthAgo.getFullYear()
+        const previousMonth = todayOneMonthAgo.getMonth()
         // Act
         cy.get('@datePickerDialog')
           .find('button svg[data-testid="ArrowLeftIcon"]')
@@ -156,10 +155,11 @@ describe('Date picker - Material UI', () => {
 
       it('visits the next calendar month', () => {
         // Arrange
-        const todayOneMonthAhead = today.setMonth(today.getMonth() + 1)
-        const dateOneMonthAhead = new Date(todayOneMonthAhead)
-        const yearOneMonthAhead = dateOneMonthAhead.getFullYear()
-        const nextMonth = dateOneMonthAhead.getMonth()
+        let todayOneMonthAhead = new Date()
+        todayOneMonthAhead = todayOneMonthAhead.setMonth(todayOneMonthAhead.getMonth() + 1)
+        todayOneMonthAhead = new Date(todayOneMonthAhead)
+        const yearOneMonthAhead = todayOneMonthAhead.getFullYear()
+        const nextMonth = todayOneMonthAhead.getMonth()
         // Act
         cy.get('@datePickerDialog')
           .find('button svg[data-testid="ArrowRightIcon"]')
@@ -174,11 +174,11 @@ describe('Date picker - Material UI', () => {
     context('Year different than the current one', () => {
       it('picks a date in the 1st of January (5 years ahead)', () => {
         // Arrange
-        const todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
+        let todayFiveYearsAhead = new Date()
+        todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
         let firstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
         firstOfJanuaryFiveYearsAhead.setDate(1)
         firstOfJanuaryFiveYearsAhead.setMonth(0)
-        firstOfJanuaryFiveYearsAhead = new Date(firstOfJanuaryFiveYearsAhead)
         // Act
         cy.get('@currentMonthAndYear').click()
         cy.contains('.MuiYearCalendar-root button', year + 5)

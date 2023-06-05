@@ -116,21 +116,55 @@ describe('Date picker - Material UI', () => {
           .should('be.visible')
       })
 
-      it('visits the next calendar month', () => {
-        // Arrange
-        let todayOneMonthAhead = new Date()
-        todayOneMonthAhead = todayOneMonthAhead.setMonth(todayOneMonthAhead.getMonth() + 1)
-        todayOneMonthAhead = new Date(todayOneMonthAhead)
-        const yearOneMonthAhead = todayOneMonthAhead.getFullYear()
-        const nextMonth = todayOneMonthAhead.getMonth()
-        // Act
-        cy.get('@datePickerDialog')
-          .find('button svg[data-testid="ArrowRightIcon"]')
-          .click()
-        // Assert
-        cy.get('@datePickerDialog')
-          .find(`[role="presentation"]:contains(${months[nextMonth]} ${yearOneMonthAhead})`)
-          .should('be.visible')
+      context('Previous and next months', () => {
+        it('picks the 28th of the previous month', () => {
+          // Arrange
+          const twentyEighthOfPreviousMonth = new Date('2023-05-28')
+          // Act
+          cy.get('@datePickerDialog')
+            .find('button svg[data-testid="ArrowLeftIcon"]')
+            .click()
+          // Assert
+          cy.get('@datePickerDialog')
+            .find('[role="presentation"]:contains(May 2023)')
+            .should('be.visible')
+          // Act
+          cy.get('@calendar')
+            .find('[role="gridcell"]')
+            .contains('28')
+            .should('be.visible')
+            .click()
+          // Assert
+          cy.assertPickedDateIsEqualTo(twentyEighthOfPreviousMonth)
+        })
+
+        it('picks the 17th two months ahead', () => {
+          // Arrange
+          const seventeenthTwoMonthsAhead = new Date('2023-08-17')
+          // Act
+          cy.get('@datePickerDialog')
+            .find('button svg[data-testid="ArrowRightIcon"]')
+            .as('calendarArrowRightIcon')
+            .click()
+          // Assert
+          cy.get('@datePickerDialog')
+            .find('[role="presentation"]:contains(July 2023)')
+            .should('be.visible')
+          // Act
+          cy.get('@calendarArrowRightIcon').click()
+          // Assert
+          cy.get('@datePickerDialog')
+            .find('[role="presentation"]:contains(August 2023)')
+            .should('be.visible')
+          // Act
+          cy.get('@calendar')
+            .find('[role="gridcell"]')
+            .contains('17')
+            .should('be.visible')
+            .click()
+          // Assert
+          cy.assertPickedDateIsEqualTo(seventeenthTwoMonthsAhead)
+        })
       })
 
       context('Year different than the current one', () => {

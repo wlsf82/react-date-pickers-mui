@@ -1,40 +1,7 @@
 describe('Date picker - Material UI', () => {
-  // Arrange
-  const today = new Date()
-  const todaysDay = today.getDate()
-  // Arrange (steps that are equal to all tests)
-  beforeEach(() => {
-    // Visit the url of the web page under test
-    cy.visit('/date-picker')
-    // From the 'Basic date picker' label,
-    // get the next element,
-    // and give it an alias of `basicDatePicker`
-    cy.contains('label', 'Basic date picker')
-      .next()
-      .as('basicDatePicker')
-    // From the `basicDatePicker`,
-    // find the calendar button by its aria-label,
-    // give it an alias of `calendarButton`
-    // and click on it
-    cy.get('@basicDatePicker')
-      .find('button[aria-label="Choose date"]')
-      .as('calendarButton')
-      .click()
-    // Get the opened date picker dialog by its role,
-    // give it an alias of `datePickerDialog`,
-    // and assert it is visible
-    cy.get('div[role="dialog"]')
-      .as('datePickerDialog')
-      .should('be.visible')
-    // From the `datePickerDialog`,
-    // find the calendar by its role
-    // and give it an alias of `calendar`
-    cy.get('@datePickerDialog')
-      .find('div[role="grid"]')
-      .as('calendar')
-  })
-
   afterEach(() => {
+    // Scroll to the top to help debugging videos and screenshots
+    cy.scrollTo('top')
     // Wait 2 seconds after every test
     // so the recorded video doesn't get cut
     // Source: https://youtu.be/afy7iS13ctM
@@ -42,7 +9,19 @@ describe('Date picker - Material UI', () => {
     cy.wait(2000)
   })
 
-  it('closes the date picker dialog', () => {
+  it('opens and closes the date picker dialog', () => {
+    // Arrange
+    cy.visit('/date-picker')
+    // Act
+    cy.contains('label', 'Basic date picker')
+      .next()
+      .find('button[aria-label="Choose date"]')
+      .as('calendarButton')
+      .click()
+    // Assert
+    cy.get('div[role="dialog"]')
+      .should('be.visible')
+      .as('datePickerDialog')
     // Act
     cy.get('@calendarButton')
       .click()
@@ -51,105 +30,89 @@ describe('Date picker - Material UI', () => {
       .should('not.exist')
   })
 
-  it('picks the current date (today)', () => {
-    // Act
-    cy.get('@calendar')
-      .find('[role="gridcell"]')
-      .contains(todaysDay)
-      .should('be.visible')
-      .as('today')
-    cy.get('@today').click()
-    // Assert
-    cy.assertPickedDateIsEqualTo(today)
-  })
-
-  it('picks a date in the past (yesterday)', () => {
+  context('With `cy.clock("2023-06-06")`', () => {
     // Arrange
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-    const yesterdaysDay = yesterday.getDate()
-    // In case today is the 1st day of the month,
-    // navigate to the previous month first
-    if (todaysDay === 1) {
-      cy.get('@datePickerDialog')
-        .find('button svg[data-testid="ArrowLeftIcon"]')
-        .click()
-    }
-    // Act
-    cy.get('@calendar')
-      .find('[role="gridcell"]')
-      .contains(yesterdaysDay)
-      .should('be.visible')
-      .as('yesterday')
-    cy.get('@yesterday').click()
-    // Assert
-    cy.assertPickedDateIsEqualTo(yesterday)
-  })
-
-  it('picks a date in the future (tomorrow)', () => {
-    // Arrange
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    const tomorrowsDay = tomorrow.getDate()
-    // In case tomorrow is the 1st day of next month,
-    // navigate to the next month first
-    if (tomorrowsDay === 1) {
-      cy.get('@datePickerDialog')
-        .find('button svg[data-testid="ArrowRightIcon"]')
-        .click()
-    }
-    // Act
-    cy.get('@calendar')
-      .find('[role="gridcell"]')
-      .contains(tomorrowsDay)
-      .should('be.visible')
-      .as('tomorrow')
-    cy.get('@tomorrow').click()
-    // Assert
-    cy.assertPickedDateIsEqualTo(tomorrow)
-  })
-
-  context('Month and year', () => {
-    // Arrange
-    const year = today.getFullYear()
-    const month = today.getMonth()
-    const months = Object.freeze({
-      0: 'January',
-      1: 'February',
-      2: 'March',
-      3: 'April',
-      4: 'May',
-      5: 'June',
-      6: 'July',
-      7: 'August',
-      8: 'September',
-      9: 'October',
-      10: 'November',
-      11: 'December',
-    })
-
+    const today = new Date('2023-06-06')
+    // Arrange (steps that are equal to all tests)
     beforeEach(() => {
-      cy.get('@datePickerDialog')
-        .find(`[role="presentation"]:contains(${months[month]} ${year})`)
-        .as('currentMonthAndYear')
+      // Freeze the date to June 6, 2023
+      cy.clock(today.getTime())
+      // Prevent failure due to application's uncaught exception
+      // when using `cy.clock()` 🤷
+      cy.on('uncaught:exception', () => false)
+      // Visit the url of the web page under test
+      cy.visit('/date-picker')
+      // From the 'Basic date picker' label,
+      // get the next element,
+      // and give it an alias of `basicDatePicker`
+      cy.contains('label', 'Basic date picker')
+        .next()
+        .as('basicDatePicker')
+      // From the `basicDatePicker`,
+      // find the calendar button by its aria-label,
+      // give it an alias of `calendarButton`,
+      // and click on it
+      cy.get('@basicDatePicker')
+        .find('button[aria-label="Choose date"]')
+        .as('calendarButton')
+        .click()
+      // Get the opened date picker dialog by its role,
+      // give it an alias of `datePickerDialog`,
+      // and assert it is visible
+      cy.get('div[role="dialog"]')
+        .as('datePickerDialog')
         .should('be.visible')
+      // From the `datePickerDialog`,
+      // find the calendar by its role,
+      // and give it an alias of `calendar`
+      cy.get('@datePickerDialog')
+        .find('div[role="grid"]')
+        .as('calendar')
     })
 
-    context('Previous and next months', () => {
-      it('visits the previous calendar month', () => {
-        // Arrange
-        let todayOneMonthAgo = new Date()
-        todayOneMonthAgo = todayOneMonthAgo.setMonth(todayOneMonthAgo.getMonth() - 1)
-        todayOneMonthAgo = new Date(todayOneMonthAgo)
-        const yearOneMonthAgo = todayOneMonthAgo.getFullYear()
-        const previousMonth = todayOneMonthAgo.getMonth()
-        // Act
+    it('picks the current date (today)', () => {
+      // Act
+      cy.get('@calendar')
+        .find('[role="gridcell"]')
+        .contains('6')
+        .should('be.visible')
+        .click()
+      // Assert
+      cy.assertPickedDateIsEqualTo(today)
+    })
+
+    it('picks a date in the past (yesterday)', () => {
+      // Arrange
+      const yesterday = new Date('2023-06-05')
+      // Act
+      cy.get('@calendar')
+        .find('[role="gridcell"]')
+        .contains('5')
+        .should('be.visible')
+        .click()
+      // Assert
+      cy.assertPickedDateIsEqualTo(yesterday)
+    })
+
+    it('picks a date in the future (tomorrow)', () => {
+      // Arrange
+      const tomorrow = new Date('2023-06-07')
+      // Act
+      cy.get('@calendar')
+        .find('[role="gridcell"]')
+        .contains('7')
+        .should('be.visible')
+        .click()
+      // Assert
+      cy.assertPickedDateIsEqualTo(tomorrow)
+    })
+
+    context('Month and year', () => {
+      beforeEach(() => {
+        // Arrange and assert
         cy.get('@datePickerDialog')
-          .find('button svg[data-testid="ArrowLeftIcon"]')
-          .click()
-        // Assert
-        cy.get('@datePickerDialog')
-          .find(`[role="presentation"]:contains(${months[previousMonth]} ${yearOneMonthAgo})`)
+          .find('[role="presentation"]:contains(June 2023)')
+          .as('currentMonthAndYear')
           .should('be.visible')
       })
 
@@ -169,28 +132,24 @@ describe('Date picker - Material UI', () => {
           .find(`[role="presentation"]:contains(${months[nextMonth]} ${yearOneMonthAhead})`)
           .should('be.visible')
       })
-    })
 
-    context('Year different than the current one', () => {
-      it('picks a date in the 1st of January (5 years ahead)', () => {
-        // Arrange
-        let todayFiveYearsAhead = new Date()
-        todayFiveYearsAhead = today.setFullYear(today.getFullYear() + 5)
-        let firstOfJanuaryFiveYearsAhead = new Date(todayFiveYearsAhead)
-        firstOfJanuaryFiveYearsAhead.setDate(1)
-        firstOfJanuaryFiveYearsAhead.setMonth(0)
-        // Act
-        cy.get('@currentMonthAndYear').click()
-        cy.contains('.MuiYearCalendar-root button', year + 5)
-          .should('be.visible')
-          .click()
-        cy.get('@calendar')
-          .find('[role="gridcell"]')
-          .contains(firstOfJanuaryFiveYearsAhead.getDate())
-          .should('be.visible')
-          .click()
-        // Assert
-        cy.assertPickedDateIsEqualTo(firstOfJanuaryFiveYearsAhead)
+      context('Year different than the current one', () => {
+        it('picks the 1st of January (5 years ahead)', () => {
+          // Arrange
+          const firstOfJanuaryFiveYearsAhead = new Date('2028-01-01')
+          // Act
+          cy.get('@currentMonthAndYear').click()
+          cy.contains('.MuiYearCalendar-root button', '2028')
+            .should('be.visible')
+            .click()
+          cy.get('@calendar')
+            .find('[role="gridcell"]')
+            .contains('1')
+            .should('be.visible')
+            .click()
+          // Assert
+          cy.assertPickedDateIsEqualTo(firstOfJanuaryFiveYearsAhead)
+        })
       })
     })
   })

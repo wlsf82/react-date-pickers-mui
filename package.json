@@ -9,7 +9,8 @@
     "lint": "eslint cypress/**/*.js && eslint cypress.config.js",
     "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix",
     "cy:open": "cypress open",
-    "test": "cypress run"
+    "test": "cypress run",
+    "test:and:gen:report": "node e2e-run-tests.js"
   },
   "keywords": [
     "testing",

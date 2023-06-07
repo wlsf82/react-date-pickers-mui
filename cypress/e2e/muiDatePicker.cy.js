@@ -1,7 +1,5 @@
 describe('Date picker - Material UI', () => {
   afterEach(() => {
-    // Scroll to the top to help debugging videos and screenshots
-    cy.scrollTo('top')
     // Wait 2 seconds after every test
     // so the recorded video doesn't get cut
     // Source: https://youtu.be/afy7iS13ctM
@@ -11,9 +9,9 @@ describe('Date picker - Material UI', () => {
 
   it('opens and closes the date picker dialog', () => {
     // Arrange
-    cy.visit('/date-picker')
+    cy.visit('/')
     // Act
-    cy.contains('label', 'Basic date picker')
+    cy.contains('label', 'Birthdate')
       .next()
       .find('button[aria-label="Choose date"]')
       .as('calendarButton')
@@ -37,15 +35,12 @@ describe('Date picker - Material UI', () => {
     beforeEach(() => {
       // Freeze the date to June 6, 2023
       cy.clock(today.getTime())
-      // Prevent failure due to application's uncaught exception
-      // when using `cy.clock()` 🤷
-      cy.on('uncaught:exception', () => false)
       // Visit the url of the web page under test
-      cy.visit('/date-picker')
-      // From the 'Basic date picker' label,
+      cy.visit('/')
+      // From the 'Birthdate' label,
       // get the next element,
       // and give it an alias of `basicDatePicker`
-      cy.contains('label', 'Basic date picker')
+      cy.contains('label', 'Birthdate')
         .next()
         .as('basicDatePicker')
       // From the `basicDatePicker`,

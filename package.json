@@ -4,6 +4,8 @@
   "description": "Sample project to demonstrate how to interact with Material UI date fields using Cypress.",
   "main": "cypress.config.js",
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "lint": "eslint cypress/**/*.js && eslint cypress.config.js",
     "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix",
     "cy:open": "cypress open",
@@ -27,5 +29,38 @@
     "cypress-plugin-xhr-toggle": "^1.0.0",
     "eslint": "^8.40.0",
     "eslint-plugin-cypress": "^2.13.3"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
+    "@mui/x-date-pickers": "^6.6.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "create-react-app": "^5.0.1",
+    "dayjs": "^1.11.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

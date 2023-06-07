@@ -13,7 +13,7 @@ It is required to have git, Node.js and npm installed to clone and run this proj
 
 ## Installation
 
-Run `npm install` (or `npm i` for the short version) to install the dev dependencies.
+Run `npm install` (or `npm i` for the short version) to install the app and dev dependencies.
 
 ## Starting the app
 

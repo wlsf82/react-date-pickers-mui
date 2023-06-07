@@ -19,7 +19,7 @@ Run `npm install` (or `npm i` for the short version) to install the dev dependen
 
 Run`npm start` to run the app in development mode locally.
 
-> If everything goes well, you should see the app on `http://localhost:3000`.
+> If everything goes well, you should see the app running on `http://localhost:3000`.
 
 ## Tests
 

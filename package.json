@@ -35,9 +35,6 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.4",
     "@mui/x-date-pickers": "^6.6.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "create-react-app": "^5.0.1",
     "dayjs": "^1.11.8",
     "react": "^18.2.0",
@@ -47,8 +44,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

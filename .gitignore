@@ -1,7 +1,18 @@
+# Misc
 .DS_Store
+
+# Cypress
 cypress.env.json
 cypress/downloads/
 cypress/screenshots/
 cypress/videos/
+
+# Test reports
+test-results.xml
+test-report/
+
+# Modules
 node_modules/
+
+# Build
 build/

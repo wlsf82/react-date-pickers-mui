@@ -11,7 +11,7 @@ describe('Date picker - Material UI', () => {
     // Arrange
     cy.visit('/')
     // Act
-    cy.contains('label', 'Birthdate')
+    cy.contains('label', 'Date Picker')
       .next()
       .find('button[aria-label="Choose date"]')
       .as('calendarButton')
@@ -37,10 +37,10 @@ describe('Date picker - Material UI', () => {
       cy.clock(today.getTime())
       // Visit the url of the web page under test
       cy.visit('/')
-      // From the 'Birthdate' label,
+      // From the 'Date Picker' label,
       // get the next element,
       // and give it an alias of `basicDatePicker`
-      cy.contains('label', 'Birthdate')
+      cy.contains('label', 'Date Picker')
         .next()
         .as('basicDatePicker')
       // From the `basicDatePicker`,

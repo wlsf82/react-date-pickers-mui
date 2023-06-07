@@ -7,7 +7,7 @@ import './App.css'
 export default function FirstComponent() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker label="Birthdate" />
+      <DatePicker label="Date Picker" />
     </LocalizationProvider>
   )
 }

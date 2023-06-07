@@ -23,7 +23,7 @@ Or, run `npm run cy:open` to open the Cypress App and run the tests in interacti
 
 > Below is an example of the running tests.
 
-https://github.com/wlsf82/react-date-pickers-mui/assets/2768415/8887476a-1e3f-45c6-b20e-1eebdf0a1d82
+https://github.com/wlsf82/react-date-pickers-mui/assets/2768415/c40c505c-4550-4aa7-96dc-8a8c774c527c
 
 ## Support this project
 

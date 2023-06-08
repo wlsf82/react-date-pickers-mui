@@ -52,7 +52,8 @@ cypress.run({ reporter: null }).then(({
   fs.writeFile(testResultsFile, testResultsObj, err => {
     if (err) {
       console.error(err)
+    } else {
+      console.log(`\nTest report available at: ${testResultsFile}\n`)
     }
-    console.log(`\nTest report available at: ${testResultsFile}\n`)
   })
 })

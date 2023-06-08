@@ -27,7 +27,11 @@ Run `npm test` (or `npm t` for the short version) to run the test in headless mo
 
 Or, run `npm run cy:open` to open the Cypress App and run the tests in interactive mode.
 
-> Below is an example of the running tests.
+> It's also possible to run the tests via Node.js with the command `npm test:and:gen:report`, which runs the tests in headless mode and generates a JSON-file-format test report inside the (not versioned) `test-report/` directory.
+
+### Tests sample
+
+Below is an example of the running tests.
 
 https://github.com/wlsf82/react-date-pickers-mui/assets/2768415/c40c505c-4550-4aa7-96dc-8a8c774c527c
 

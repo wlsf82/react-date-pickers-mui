@@ -27,7 +27,7 @@ Run `npm test` (or `npm t` for the short version) to run the test in headless mo
 
 Or, run `npm run cy:open` to open the Cypress App and run the tests in interactive mode.
 
-> It's also possible to run the tests via Node.js with the command `npm test:and:gen:report`, which runs the tests in headless mode and generates a JSON-file-format test report inside the (not versioned) `test-report/` directory.
+> It's also possible to run the tests via Node.js with the command `npm run test:and:gen:report`, which runs the tests in headless mode and generates a JSON-file-format test report inside the (not versioned) `test-report/` directory.
 
 ### Tests sample
 

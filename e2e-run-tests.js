@@ -2,7 +2,7 @@ const cypress = require('cypress')
 const fs = require('fs')
 const path = require('path')
 
-cypress.run({ reporter: null }).then(({
+cypress.run().then(({
   status,
   startedTestsAt,
   endedTestsAt,

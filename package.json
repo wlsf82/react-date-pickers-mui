@@ -26,10 +26,10 @@
   "author": "Walmyr <wlsf82@gmail.com> (https://walmyr.dev/)",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^12.17.3",
+    "cypress": "^12.17.4",
     "cypress-plugin-xhr-toggle": "^1.0.0",
-    "eslint": "^8.46.0",
-    "eslint-plugin-cypress": "^2.13.3"
+    "eslint": "^8.48.0",
+    "eslint-plugin-cypress": "^2.14.0"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",

@@ -26,9 +26,9 @@
   "author": "Walmyr <wlsf82@gmail.com> (https://walmyr.dev/)",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^13.1.0",
-    "eslint": "^8.48.0",
-    "eslint-plugin-cypress": "^2.14.0"
+    "cypress": "^13.2.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-cypress": "^2.15.1"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
